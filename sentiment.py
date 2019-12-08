@@ -1,3 +1,6 @@
+# Account Key Path: /Untitled/Users/Sherry/Desktop/accountKey.json
+# export GOOGLE_APPLICATION_CREDENTIALS="accountKey.json"
+
 import IPython
 import pandas as pd
 import math
@@ -17,9 +20,9 @@ def getSentiment(line):
 client = language.LanguageServiceClient()
 
 #load dataset
-data = pd.read_excel("output_sentiment.xlsx")
+data = pd.read_excel("topCast.xlsx")
 
-for i in range(0,900):
+for i in range(1650,2550):
 	print(i)	
 	line = data["line_text"][i]	
 	if(isinstance(line, str)):
@@ -27,6 +30,5 @@ for i in range(0,900):
 		# Detects the sentiment of the text
 		sentiment = client.analyze_sentiment(document=document).document_sentiment
 		data["sentiment score"][i] = sentiment.score
-		data["sentiment magnitude"][i] = sentiment.magnitude
 
-data.to_excel('output_sentiment.xlsx', index=False)
+data.to_excel('topCast_sentiment.xlsx', index=False)
